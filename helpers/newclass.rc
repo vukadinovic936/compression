@@ -1,0 +1,29 @@
+#!/bin/bash
+
+name=$1
+upper=${name^^}_H
+echo "#ifndef $upper
+#define $upper
+#include <string>
+
+class $name
+{
+	public:
+		$name();
+		virtual ~$name();
+
+	private:
+};
+
+#endif" > ../include/$name.h
+
+echo -n '#include "' > ../src/$name.cpp
+echo -n $name.h  >> ../src/$name.cpp
+echo -n '"' >> ../src/$name.cpp
+echo "
+$name::$name(){
+
+}
+$name::~$name(){
+
+}" >>  ../src/$name.cpp
