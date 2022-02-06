@@ -16,7 +16,7 @@ OBJ=$(patsubst %,$(ODIR)/%,$(_SRC:.cpp=.o))
 $(ODIR)/%.o: $(SRC)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-hellomake: $(OBJ)
+zeno: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean

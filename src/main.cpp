@@ -1,14 +1,17 @@
 #include <string>
 #include <iostream>
-#include "Command.h"
-#include "File.h"
+#include "CommandFactory.h"
+#include "StringsId.h"
 
 using namespace std;
 int main(int argc, char** argv){
-	cout << "You have entered " << argc << " arguments:" << "\n"; 
-    for (int i = 0; i < argc; ++i)
-        cout << argv[i] << "\n";
+	try{
+		std::string commandName = argv[1];
+		CommandFactory fac(commandName);	
+		fac.getCommand()->run();
+	}catch(exception e){
+		CommandFactory fac(STRINGS_HELP_COMMAND);	
+		fac.getCommand()->run();
+	}
 
-	File file;
-	cout << file.getName() << endl;
 }

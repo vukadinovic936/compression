@@ -1,0 +1,6 @@
+#!/bin/bash
+CONST_NAME=$1
+STRING_NAME=$2
+CONST_NAME=STRINGS_$CONST_NAME
+echo "extern const char* $CONST_NAME;" >> ../include/StringsId.h
+echo "const char* $CONST_NAME = \"$STRING_NAME\";" >> ../src/StringsId.cpp
