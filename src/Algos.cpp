@@ -2,13 +2,14 @@
 Algos::Algos(){
 
 }
+
 Algos::Algos(std::string name, std::string description):Command(name, description){
 
 }
+
+int Algos::run(){
+	return 0;
+}
 Algos::~Algos(){
 
-}
-int Algos::run(){
-	std::cout << "comparing algos" << std::endl;
-	return 0;
 }

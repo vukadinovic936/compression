@@ -29,30 +29,26 @@ public:
 		if(this->right) right_height=this->right->height()+1;
 		return max(left_height, right_height);
 	}
-
-	void printTreeUtil(int space)
-	{
-		// Base case
-		if (this == NULL)
-			return;
-	
-		// Increase distance between levels
-		space += COUNT;
-	
-		// Process right child first
-		this->right->printTreeUtil(space);
-	
-		// Print current node after space
-		// count
-		cout<<endl;
-		for (int i = COUNT; i < space; i++)
-			cout<<" ";
-		cout<<this->ch<<"\n";
-	
-		// Process left child
-		this->left->printTreeUtil(space);
+	void printTreeUtil(int space){
+			// Base case
+			if (this == NULL)
+				return;
+		
+			// Increase distance between levels
+			space += 10;
+		
+			// Process right child first
+			this->right->printTreeUtil(space);
+		
+			// Print current node after space
+			// count
+			printf("\n");
+			printf("%*s", space-10,"");
+			printf("%c\n",this->ch);
+		
+			// Process left child
+			this->left->printTreeUtil(space);
 	}
-
 	// Wrapper over print2DUtil()
 	void printTree()
 	{
@@ -174,29 +170,17 @@ void uncompress(string &compressed_string, string &uncompressed_string, vector<p
 			el_code="";
 		}
 	}
+
 }
 
-void printTree(Node* pq){
-	printf("%c: %d  ", pq->ch, pq->freq);
-	if(pq->left!=0)
-		printTree(pq->left);
-	if(pq->right!=0)
-		printTree(pq->right);
-}
-
-void getCommand(){
-	cout << "S" << endl;
-}
-
-
- 
 
  
 int main(int argc, char** argv){
 
+	string txt1 = "ADBADEDBBDD";
+	getHuffmanTree(txt1)->printTree();
 	cout <<  "COMPRESSING" << endl;
 	cout << endl;
-	string txt1 = "ADBADEDBBDD";
 	string compressed_string = "";
 	string uncompressed_string = "";
 	vector<pair<char,int>> code;
