@@ -1,12 +1,4 @@
 #include "CommandFactory.h"
-#include <iostream>
-#include <string>
-#include <iostream>
-#include "Algos.h"
-#include "Compress.h"
-#include "Uncompress.h"
-#include "Help.h"
-#include "StringsId.h"
 
 CommandFactory::CommandFactory(std::string name){
 

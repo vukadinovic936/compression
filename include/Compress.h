@@ -1,8 +1,15 @@
 #ifndef COMPRESS_H
 #define COMPRESS_H
-#include <Command.h>
 #include <string>
 #include <iostream>
+#include <unordered_map>
+#include <queue>
+
+#include "Huffman.h"
+#include "Command.h"
+#include "CodingFactory.h"
+
+using namespace Helpers;
 
 class Compress : public Command
 {

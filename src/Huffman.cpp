@@ -75,7 +75,6 @@ Node* Huffman::getHuffmanTree(std::string text){
 	return pq.top();
 }
 std::pair<std::string,code> Huffman::compress(std::string txt){
-
 	std::unordered_map<char,std::string> hashmap;
 	code coding;
 	this->getHuffmanCoding(this->getHuffmanTree(txt),hashmap, coding);
