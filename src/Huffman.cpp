@@ -45,8 +45,7 @@ void Huffman::getHuffmanCoding(Node* root, std::unordered_map<char,std::string> 
 
 		}
 	}
-Node* Huffman::getHuffmanTree(std::string text){
-	std::unordered_map<char,int> freq;
+Node* Huffman::getHuffmanTree(std::string text,std::unordered_map<char,int> freq){
 	struct myComp {
 		constexpr bool operator()(
 			Node* const& a,
@@ -58,9 +57,7 @@ Node* Huffman::getHuffmanTree(std::string text){
 	};
 	std::priority_queue<Node*,std::vector<Node*>,myComp> pq;
 
-	for(int i=0;i<text.length();i++){
-		freq[text[i]]++;
-	}	
+
 	std::unordered_map<char,int>::iterator it;
 	for(it=freq.begin();it!=freq.end();it++){
 		pq.push(new Node(it->first,it->second));
@@ -74,10 +71,10 @@ Node* Huffman::getHuffmanTree(std::string text){
 	}
 	return pq.top();
 }
-std::pair<std::string,code> Huffman::compress(std::string txt){
+std::pair<std::string,code> Huffman::compress(std::string txt, std::unordered_map<char,int> freq){
 	std::unordered_map<char,std::string> hashmap;
 	code coding;
-	this->getHuffmanCoding(this->getHuffmanTree(txt),hashmap, coding);
+	this->getHuffmanCoding(this->getHuffmanTree(txt,freq),hashmap, coding);
 	std::string compressed_string = "";
 	for(char c : txt){
 		compressed_string+=hashmap[c];
@@ -110,5 +107,4 @@ std::string Huffman::uncompress(std::string txt, code coding){
 	}
 	return uncompressed_string;
 }
-
 

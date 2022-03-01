@@ -16,7 +16,7 @@ class Coding
 	public:
 		Coding();
 		virtual ~Coding();
-		virtual std::pair<std::string,code> compress(std::string txt) = 0;
+		virtual std::pair<std::string,code> compress(std::string txt, std::unordered_map<char,int> freq) = 0;
 		virtual std::string uncompress(std::string txt, code coding) = 0;
 	private:
 		std::string name;

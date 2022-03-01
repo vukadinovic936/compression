@@ -7,6 +7,7 @@
 #include "Coding.h"
 #include "Huffman.h"
 #include "StringsId.h"
+#include "Arithmetic.h"
 #include <stdio.h>
 #include <iostream>
 #include <fstream>

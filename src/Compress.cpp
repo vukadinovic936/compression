@@ -1,5 +1,5 @@
 #include "Compress.h"
-
+using namespace std;
 Compress::Compress(): Command(){
 
 }
@@ -13,7 +13,12 @@ int Compress::run(){
 	std::string filepath = "test.txt";
 	std::string txt = read_file(filepath);
 	CodingFactory fac;
-	std::pair<std::string,code> res = fac.getCoding()->compress(txt);
+	std::unordered_map<char, int> freq;
+	for(int i=0;i<txt.length();i++){
+		freq[txt[i]]++;
+	}	
+
+	std::pair<std::string,code> res = fac.getCoding()->compress(txt, freq);
 	std::string compressed_string=res.first;
 	code coding = res.second;
 	std::cout << "COMPRESSED STRING IS" << std::endl;

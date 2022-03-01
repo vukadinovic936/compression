@@ -2,11 +2,13 @@
 #include <iostream>
 #include "CommandFactory.h"
 #include "StringsId.h"
+#include "Arithmetic.h"
 
 
 using namespace std;
 using namespace Helpers;
 int main(int argc, char** argv){
+
 	try{
 		std::string commandName = argv[1];
 		CommandFactory fac(commandName);	
