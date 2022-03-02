@@ -10,7 +10,7 @@ Compress::~Compress(){
 
 }
 int Compress::run(){
-	std::string filepath = "test.txt";
+	std::string filepath = "test/test.txt";
 	std::string txt = read_file(filepath);
 	CodingFactory fac;
 	std::unordered_map<char, int> freq;

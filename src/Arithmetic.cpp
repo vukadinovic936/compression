@@ -38,7 +38,7 @@ std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered
 	}
 	C = C + (A * probs['\0'].first);
 	A = A * probs['\0'].second;
-	printf("ENCODEC\n");
+	printf("ENCODE\n");
 	printf("%.12f", C);
 	// Constructing the table needed symbol | cum_prob | symbol prob | length 
 	printf("NOW DECODE\n");

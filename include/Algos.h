@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include "Command.h"
+#include <iostream>
+#include <fstream>
 
 class Algos: public Command
 {

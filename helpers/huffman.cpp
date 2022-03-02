@@ -209,7 +209,7 @@ void uncompress(string &compressed_string, string &uncompressed_string, vector<p
  
 int main(int argc, char** argv){
 	//string txt1 = "practically nothing towards, the upkeep of the nest, and then— Achilles: And of course there are soldiers-Glorious Fighters Against Communism!";
-	string txt1 = "JA TE VOLIM A STA MOGUUUUUUUUUUUUUUUUUUUU SUDBINA ME NA PUUUUUUT SALJEEEEE trykasknsdakjsadjksdbjnm oasdaskjis it nI will try many possibilities in case 000 is not the first string :O";
+	string txt1 = "JA TE VOLIM A STA MOGU ME NA PUUUUUUT SALJEEEEE trykasknsdakjsadjksdbjnm oasdaskjis it nI will try many possibilities in case 000 is not the first string :O";
 	cout <<  "COMPRESSING" << endl;
 	cout << endl;
 	string compressed_string = "";
