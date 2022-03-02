@@ -14,7 +14,7 @@ class Node
 
 		int height();
 		void printTree();
-
+		void inOrder();
 		Node* getLeft();
 		Node* getRight();
 

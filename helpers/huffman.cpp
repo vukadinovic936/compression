@@ -5,7 +5,11 @@
 #include <iostream>
 #include <math.h>
 #include <string.h>
-
+#include <stack>
+#include <iostream>
+#include <fstream>
+#include <iostream>
+#include <stdio.h>
 using namespace std;
 #define COUNT 10
 class Node {
@@ -44,6 +48,9 @@ public:
 			// count
 			printf("\n");
 			printf("%*s", space-10,"");
+			if(this->ch == ' ' ){
+				printf("empt");
+			}else
 			printf("%c\n",this->ch);
 		
 			// Process left child
@@ -71,46 +78,65 @@ struct myComp {
         return a->freq > b->freq;
     }
 };
+std::string read_file(std::string file_path){
+	std::string txt = "";
+	std::string line;
+	std::ifstream myfile(file_path);
+	if (myfile.is_open())
+	{
+		while ( getline (myfile,line) )
+		{
+			txt+=line;
+		}
+		myfile.close();
+	}else{
+		std::cout << "Unable to open file" << std::endl;
+	} 
+	return txt;
 
+}
 Node* getHuffmanTree(string text){
 	unordered_map<char,int> freq;
 	priority_queue<Node*,vector<Node*>,myComp> pq;
 	for(int i=0;i<text.length();i++){
 		freq[text[i]]++;
 	}	
+	cout << text << endl;
 	unordered_map<char,int>::iterator it;
 	for(it=freq.begin();it!=freq.end();it++){
 		pq.push(new Node(it->first,it->second));
-		printf("%c:%d\n",it->first,it->second);
 	}
 	while(pq.size()>1){
 		Node* left = pq.top();
 		pq.pop();
 		Node* right = pq.top();
 		pq.pop();
-		pq.push(new Node('m',left->freq+right->freq,left,right));
+		pq.push(new Node('\0',left->freq+right->freq,left,right));
 	}
 	return pq.top();
 }
 void getHuffmanCoding(Node* root, unordered_map<char,string> &hashmap, vector<pair<char,int>> &code){
 
-		queue<pair<Node*,string>> q;
+		stack<pair<Node*,string>> q;
 	    q.push(make_pair(root, ""));
 		//bfs
 		while(!q.empty()) {
 
-			pair<Node*,string> u = q.front();
-			if(u.first->ch != 'm'){
+			pair<Node*,string> u = q.top();
+			q.pop();
+
+			if(u.first->right)
+				q.push(make_pair(u.first->right, u.second+"1"));
+
+			if(u.first->ch != '\0'){
 				hashmap[u.first->ch] = u.second ;
 				code.push_back(make_pair(u.first->ch, u.second.length()));
 			}
-			q.pop();
 
 			if(u.first->left)
 				q.push(make_pair(u.first->left, u.second+"0"));
 
-			if(u.first->right)
-				q.push(make_pair(u.first->right, u.second+"1"));
+
 
 		}
 	}	
@@ -118,10 +144,11 @@ void compress(string txt, vector<pair<char,int>> &code, string &compressed_strin
 
 	unordered_map<char,string> hashmap;
 	getHuffmanCoding(getHuffmanTree(txt), hashmap, code);
-	// for each char in txt replace it with it's code
-	for(auto i: hashmap){
-		cout << i.first << " : " << i.second << endl;
+
+	for(auto i:hashmap){
+		cout << i.first << " " << i.second << endl;
 	}
+	// for each char in txt replace it with it's code
 	compressed_string = "";
 	for(char c : txt){
 		compressed_string+=hashmap[c];
@@ -152,11 +179,16 @@ void uncompress(string &compressed_string, string &uncompressed_string, vector<p
 	for(auto i: code){
 		
 		if(i.second>cur_size){
+			for(int j=0;j<i.second-cur_size;j++)
+				el_code = el_code+ "0";
 			cur_size=i.second;
-			el_code = el_code+"0";
+		}else if(i.second<cur_size){
+			for(int j=0;j< cur_size-i.second;j++)
+				el_code.pop_back();
+			cur_size=i.second;
 		}
-		uncompress_code[el_code] = i.first;
 
+		uncompress_code[el_code] = i.first;
 		el_code = add_binary(el_code, "1");	
 	}
 	for(auto i : uncompress_code){
@@ -176,9 +208,8 @@ void uncompress(string &compressed_string, string &uncompressed_string, vector<p
 
  
 int main(int argc, char** argv){
-
-	string txt1 = "ADBADEDBBDD";
-	getHuffmanTree(txt1)->printTree();
+	//string txt1 = "practically nothing towards, the upkeep of the nest, and then— Achilles: And of course there are soldiers-Glorious Fighters Against Communism!";
+	string txt1 = "JA TE VOLIM A STA MOGUUUUUUUUUUUUUUUUUUUU SUDBINA ME NA PUUUUUUT SALJEEEEE trykasknsdakjsadjksdbjnm oasdaskjis it nI will try many possibilities in case 000 is not the first string :O";
 	cout <<  "COMPRESSING" << endl;
 	cout << endl;
 	string compressed_string = "";
@@ -187,7 +218,9 @@ int main(int argc, char** argv){
 	compress(txt1,code,compressed_string);
 	for(auto i:code){
 		cout << i.first << " " << i.second << endl;
+
 	}
+
 	cout << compressed_string << endl;
 	cout << endl;
 	cout <<  "NOW UNCOMPRESSING" << endl;

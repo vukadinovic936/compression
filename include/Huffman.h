@@ -4,13 +4,15 @@
 #include <string.h>
 #include <unordered_map>
 #include <vector>
-#include <queue>
+#include <stack>
 
 #include "Algos.h"
 #include "Node.h"
 #include "Coding.h"
-//#include "Utils.h"
+#include "Helpers.h"
 
+//#include "Utils.h"
+using namespace Helpers;
 class Huffman: public Coding 
 {
 	public:
@@ -20,7 +22,6 @@ class Huffman: public Coding
 		virtual ~Huffman();
 
 	private:
-		std::string add_binary(std::string a, std::string b);
 		std::string name;
 		std::string description;
 		Node* getHuffmanTree(std::string txt, std::unordered_map<char,int> freq);

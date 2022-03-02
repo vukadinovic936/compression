@@ -2,6 +2,8 @@
 Node::Node(char ch, int freq){
 	this->ch=ch;
 	this->freq=freq;
+	this->left=NULL;
+	this->right=NULL;
 }
 Node::Node(char ch, int freq, Node* left, Node* right){
 	this->ch=ch;
@@ -30,8 +32,16 @@ int Node::height(){
 		if(this->getRight()) right_height=this->getRight()->height()+1;
 		return std::max(left_height,right_height);
 }
+void Node::inOrder(){
+	if(this->left){
+		this->left->inOrder();
+	}	
+	printf("%c",this->ch);
+	if(this->right){
+		this->right->inOrder();
+	}
+}
 void Node::printTreeUtil(int space){
-		// Base case
 		if (this == NULL)
 			return;
 	
@@ -39,7 +49,8 @@ void Node::printTreeUtil(int space){
 		space += 10;
 	
 		// Process right child first
-		this->right->printTreeUtil(space);
+		if(this->getRight())
+			this->getRight()->printTreeUtil(space);
 	
 		// Print current node after space
 		// count
@@ -47,11 +58,14 @@ void Node::printTreeUtil(int space){
 		printf("%*s", space-10,"");
 		if(this->ch=='\0')
 			printf("dot");
+		else if(isblank(this->ch))
+			printf("empty");
 		else
 			printf("%c\n",this->ch);
 	
 		// Process left child
-		this->left->printTreeUtil(space);
+		if(this->getLeft())
+			this->getLeft()->printTreeUtil(space);
 }
 void Node::printTree(){
 	this->printTreeUtil(0);
