@@ -1,0 +1,38 @@
+Procedural and Declarative Knowledge 
+
+A distinction which is made in Artificial Intelligence is that between procedural and 
+declarative types of knowledge. A piece of knowledge is said to be declarative if it is 
+stored explicitly, so that not only the programmer but also the program can "read" it as if 
+it were in an encyclopedia or an almanac. This usually means that it is encoded locally, 
+not spread around. By contrast, procedural knowledge is not encoded as facts-only as 
+programs. A programmer may be able to peer in and say, "I see that because of these 
+procedures here, the program "knows' how to write English sentences"-but the program 
+itself may have no explicit awareness of how it writes those sentences. For instance, its 
+vocabulary may include none of the words "English", "sentence", and "write" at all! Thus 
+procedural knowledge is usually spread around in pieces, and you can't retrieve it, or 
+"key" on it. It is a global consequence of how the program works, not a local detail. In 
+other words, a piece of purely procedural knowledge is an epiphenomenon. 
+
+In most people there coexists, along with a powerful procedural representation of 
+the grammar of their native language, a weaker declarative representation of it. The two 
+may easily be in conflict, so that a native speaker will often instruct a foreigner to say 
+things he himself would never say, but which agree with the declarative "book learning" 
+he acquired in school sometime. The intuitive or chunked laws of physics and other 
+disciplines mentioned earlier fall mainly on the procedural side; the knowledge that an 
+octopus has eight tentacles falls mainly on the declarative side. 
+
+In between the declarative and procedural extremes, there are all possible shades. 
+Consider the recall of a melody. Is the melody stored in your brain, note by note? Could a 
+surgeon extract a winding neural filament from your brain, then stretch it straight, and 
+finally proceed to pinpoint along it the successively stored notes, almost as if it were a 
+piece of magnetic tape? If so, then melodies are stored declaratively. Or is the recall of a 
+melody mediated by the interaction of a large number of symbols, some of which 
+represent tonal relationships, others of which represent emotional qualities, others of 
+which represent rhythmic devices, and so on? If so, then melodies are stored 
+procedurally. In reality, there is probably a mixture of these extremes in the way a 
+melody is stored and recalled. 
+
+It is interesting that, in pulling a melody out of memory, most people do not 
+discriminate as to key, so that they are as likely to sing "Happy Birthday" in the key of F- 
+sharp as in the key of C. This indicates that tone relationships, rather than absolute tones, 
+are stored. But there is no reason 
