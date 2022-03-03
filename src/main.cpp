@@ -4,6 +4,7 @@
 #include "StringsId.h"
 #include "Arithmetic.h"
 #include "Huffman.h"
+#include "BigFloat.h"
 
 using namespace std;
 using namespace Helpers;

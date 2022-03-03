@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 #include <queue>
-
+#include <BigFloat.h>
 #include "Algos.h"
 #include "Node.h"
 #include "Coding.h"

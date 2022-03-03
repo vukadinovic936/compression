@@ -59,6 +59,7 @@ std::pair<std::string,code> Huffman::compress(std::string txt, std::unordered_ma
 	std::unordered_map<char,std::string> hashmap;
 	code coding;
 	Node *root = this->getHuffmanTree(txt,freq);
+	root->printTree();
 	this->getHuffmanCoding(root,hashmap, coding);
 	std::string compressed_string = "";
 	for(char c : txt){

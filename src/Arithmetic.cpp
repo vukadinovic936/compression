@@ -7,7 +7,6 @@ Arithmetic::Arithmetic(){
 Arithmetic::~Arithmetic(){
 
 }
-
 std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered_map<char,int> freq){
 	
 	// Convert frequencies in probabilities
@@ -17,21 +16,22 @@ std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered
 	}
 	// add one for end-of-data
 	total+=1;
+	int precision=120;
 	// first element in the pair is cumulative probability, second is symbol probability
-	std::unordered_map<char,std::pair<double,double>> probs;
-	std::map<double,std::pair<char,double>> set2;
-	double cum_prob=0.0;
+	std::unordered_map<char,std::pair<BigFloat,BigFloat>> probs;
+	std::map<BigFloat,std::pair<char,BigFloat>> set2;
+	BigFloat cum_prob = BigFloat("0.0");
 	for(auto i: freq){
-		probs[i.first] = std::make_pair(cum_prob, (double) i.second/ (double) total);
-		set2[cum_prob] = std::make_pair(i.first, (double) i.second/ (double) total);
-		cum_prob+= ( (double) i.second / (double) total);
+		probs[i.first] = std::make_pair(cum_prob, BigFloat::PrecDiv(BigFloat(i.second),BigFloat(total),precision));
+		set2[cum_prob] = std::make_pair(i.first, BigFloat::PrecDiv(BigFloat(i.second),BigFloat(total), precision ));
+		cum_prob = cum_prob + ( BigFloat::PrecDiv(BigFloat( i.second) , BigFloat(total), precision));
 	}
-	set2[cum_prob] = std::make_pair('\0', (double) 1 / (double) total);
-	probs['\0'] = std::make_pair(cum_prob,(double) 1/ (double) total);
+	set2[cum_prob] = std::make_pair('\0', BigFloat::PrecDiv(BigFloat(1),BigFloat(total), precision));
+	probs['\0'] = std::make_pair(cum_prob, BigFloat::PrecDiv(BigFloat(1),BigFloat(total), precision));
 	// starting point
-	double C=0.0;
+	BigFloat C= BigFloat("0.0");
 	// interval size
-	double A=1.0;
+	BigFloat A= BigFloat("1.0");
 	for(char c: txt){
 		C = C + (A * probs[c].first); 
 		A = A * probs[c].second;
@@ -39,7 +39,7 @@ std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered
 	C = C + (A * probs['\0'].first);
 	A = A * probs['\0'].second;
 	printf("ENCODE\n");
-	printf("%.12f", C);
+	//cout << C.ToString() << endl;
 	// Constructing the table needed symbol | cum_prob | symbol prob | length 
 	printf("NOW DECODE\n");
 	std::string decoded = "";
@@ -73,3 +73,9 @@ std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered
 std::string Arithmetic::uncompress(std::string txt, code coding){
 	return "sth";
 }
+/* 
+TODO
+	FIX endless loop , never reaches /0
+	FIX precision
+	fix file names
+/*
