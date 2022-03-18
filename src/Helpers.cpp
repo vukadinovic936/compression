@@ -69,3 +69,15 @@ std::string Helpers::add_binary(std::string a,std::string b){
    }
    return result;
 }
+double Helpers::get_entropy(std::unordered_map<char,int> freq){
+	double entropy = 0;
+	double total=0;
+	for(auto it = freq.begin(); it!=freq.end(); it++){
+		total+= (double)it->second;
+	}
+	for(auto it = freq.begin(); it!=freq.end(); it++){
+		double p = (double)it->second/total;
+		entropy += p*log2(p);
+	}
+	return -entropy;
+}

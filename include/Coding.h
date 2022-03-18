@@ -21,6 +21,7 @@ class Coding
 	private:
 		std::string name;
 		std::string description;
+		double score;
 };
 
 #endif

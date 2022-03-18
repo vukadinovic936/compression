@@ -17,6 +17,7 @@ int Compress::run(){
 	for(int i=0;i<txt.length();i++){
 		freq[txt[i]]++;
 	}	
+	printf("Entropy is %f\n",get_entropy(freq));
 	std::pair<std::string,code> res = fac.getCoding()->compress(txt, freq);
 	std::string compressed_string=res.first;
 	code coding = res.second;

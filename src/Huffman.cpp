@@ -24,12 +24,14 @@ void Huffman::getHuffmanCoding(Node* root, std::unordered_map<char,std::string> 
 
 			if(u.first->ch != '\0'){
 				hashmap[u.first->ch] = u.second ;
+				this->score += u.second.length();
 				coding.push_back(std::make_pair(u.first->ch, u.second.length()));
 			}
 
 			if(u.first->getLeft())
 				q.push(make_pair(u.first->getLeft(), u.second+"0"));
 		}
+		this->score = score/hashmap.size();
 	}
 Node* Huffman::getHuffmanTree(std::string text,std::unordered_map<char,int> freq){
 	struct myComp {
@@ -65,6 +67,7 @@ std::pair<std::string,code> Huffman::compress(std::string txt, std::unordered_ma
 	for(char c : txt){
 		compressed_string+=hashmap[c];
 	}
+	printf("Score is %f \n",this->score);
 	return make_pair(compressed_string,coding);
 }
 std::string Huffman::uncompress(std::string txt, code coding){

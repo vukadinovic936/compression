@@ -24,6 +24,7 @@ class Huffman: public Coding
 	private:
 		std::string name;
 		std::string description;
+		double score;
 		Node* getHuffmanTree(std::string txt, std::unordered_map<char,int> freq);
 		void getHuffmanCoding(Node* root, std::unordered_map<char,std::string> &hashmap, code &coding);
 };

@@ -16,7 +16,7 @@ std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered
 	}
 	// add one for end-of-data
 	total+=1;
-	int precision=120;
+	int precision=10;;
 	// first element in the pair is cumulative probability, second is symbol probability
 	std::unordered_map<char,std::pair<BigFloat,BigFloat>> probs;
 	std::map<BigFloat,std::pair<char,BigFloat>> set2;
@@ -39,7 +39,7 @@ std::pair<std::string,code> Arithmetic::compress(std::string txt, std::unordered
 	C = C + (A * probs['\0'].first);
 	A = A * probs['\0'].second;
 	printf("ENCODE\n");
-	//cout << C.ToString() << endl;
+	cout << C.ToString() << endl;
 	// Constructing the table needed symbol | cum_prob | symbol prob | length 
 	printf("NOW DECODE\n");
 	std::string decoded = "";
@@ -78,4 +78,5 @@ TODO
 	FIX endless loop , never reaches /0
 	FIX precision
 	fix file names
-/*
+GOTTA MAKE IT WITH BINARY!
+*/
