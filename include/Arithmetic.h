@@ -9,18 +9,24 @@
 #include "Algos.h"
 #include "Node.h"
 #include "Coding.h"
+#include "Helpers.h"
+#include "StringsId.h"
+#include <cstdio>
 
+using namespace Helpers;
 class Arithmetic : public Coding
 {
 	public:
 		Arithmetic();
 		virtual ~Arithmetic();
-		std::pair<std::string,code> compress(std::string txt, std::unordered_map<char, int> freq);
-		std::string uncompress(std::string txt, code coding);
+
+		void compress(std::string input_path, std::string output_path);
+		void uncompress(std::string input_path, std::string output_path);
 
 	private:
 		std::string name;
 		std::string description;
+
 };
 
 #endif

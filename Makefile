@@ -18,6 +18,7 @@ $(ODIR)/%.o: $(SRC)/%.cpp $(DEPS)
 
 zeno: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(MAKE) -C lib/ArithCodeTut/src/
 
 .PHONY: clean
 

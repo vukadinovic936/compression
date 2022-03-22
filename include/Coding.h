@@ -6,18 +6,18 @@
 #include <unordered_map>
 #include <vector>
 #include <queue>
-
+#include <StringsId.h>
 #include "Node.h"
 
-#define code std::vector<std::pair<char,int>> 
 
 class Coding
 {
 	public:
 		Coding();
 		virtual ~Coding();
-		virtual std::pair<std::string,code> compress(std::string txt, std::unordered_map<char,int> freq) = 0;
-		virtual std::string uncompress(std::string txt, code coding) = 0;
+		virtual void compress(std::string input_path, std::string output_path);
+		virtual void uncompress(std::string input_path, std::string output_path);
+
 	private:
 		std::string name;
 		std::string description;

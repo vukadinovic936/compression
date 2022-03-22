@@ -6,3 +6,5 @@ extern const char* STRINGS_HELP_CONTENT;
 extern const char* STRINGS_HUFFMAN_CODING;
 extern const char* STRINGS_CODING_FILE;
 extern const char* STRINGS_ARITHMETIC;
+extern const char* STRINGS_TEMP_ZEN;
+extern const char* STRINGS_DECODED_TXT;

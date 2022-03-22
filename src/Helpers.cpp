@@ -2,6 +2,18 @@
 
 using namespace Helpers;
 
+void Helpers::write_file(std::string file_path, std::string content){
+
+	clear_file(file_path);
+	append_to_file(file_path,content);
+
+}
+void Helpers::append_to_file(std::string file_path, std::string content){
+	std::ofstream myfile;
+	myfile.open (file_path, std::ios_base::app);
+	myfile << content;
+	myfile.close();
+}
 std::string Helpers::read_file(std::string file_path){
 	std::string txt = "";
 	std::string line;
@@ -80,4 +92,9 @@ double Helpers::get_entropy(std::unordered_map<char,int> freq){
 		entropy += p*log2(p);
 	}
 	return -entropy;
+}
+void Helpers::clear_file(std::string file_path){
+	std::ofstream ofs;
+	ofs.open(file_path, std::ofstream::out | std::ofstream::trunc);
+	ofs.close();
 }

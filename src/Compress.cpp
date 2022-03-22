@@ -10,23 +10,18 @@ Compress::~Compress(){
 
 }
 int Compress::run(){
+	//input params
 	std::string filepath = "test/test.txt";
+	std::string output_file = "temp.zen";	
+
 	std::string txt = read_file(filepath);
 	CodingFactory fac;
-	std::unordered_map<char, int> freq;
-	for(int i=0;i<txt.length();i++){
-		freq[txt[i]]++;
-	}	
-	printf("Entropy is %f\n",get_entropy(freq));
-	std::pair<std::string,code> res = fac.getCoding()->compress(txt, freq);
-	std::string compressed_string=res.first;
-	code coding = res.second;
-	std::cout << "COMPRESSED STRING IS" << std::endl;
-	std::cout << compressed_string << std::endl;
+	fac.getCoding()->compress(filepath, output_file);
 
-	std::string uncompressed_string = fac.getCoding()->uncompress(compressed_string, coding);
-	std::cout << std::endl;
-	std::cout << "Uncompressed string is" << std::endl;
-	std::cout << uncompressed_string << std::endl;
+//	if(read_file(STRINGS_CODING_FILE)==STRINGS_HUFFMAN_CODING){
+//		append_to_file(output_file, "0");	
+//	}else{
+//		append_to_file(output_file, "1");	
+//	}
 	return 0;
 }

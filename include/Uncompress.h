@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include "Command.h"
+#include "Helpers.h"
+#include "CodingFactory.h"
 
 class Uncompress: public Command
 {

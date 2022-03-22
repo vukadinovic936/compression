@@ -12,13 +12,16 @@
 #include "Helpers.h"
 
 //#include "Utils.h"
+
+#define code std::vector<std::pair<char,int>> 
+
 using namespace Helpers;
 class Huffman: public Coding 
 {
 	public:
 		Huffman();
-		std::pair<std::string,code> compress(std::string txt, std::unordered_map<char, int> freq);
-		std::string uncompress(std::string txt, code coding);
+		void compress(std::string input_path, std::string outout_path);
+		void uncompress(std::string input_path, std::string output_path);
 		virtual ~Huffman();
 
 	private:

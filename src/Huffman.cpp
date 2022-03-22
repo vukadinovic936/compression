@@ -57,7 +57,13 @@ Node* Huffman::getHuffmanTree(std::string text,std::unordered_map<char,int> freq
 	}
 	return pq.top();
 }
-std::pair<std::string,code> Huffman::compress(std::string txt, std::unordered_map<char,int> freq){
+void Huffman::compress(std::string input_file, std::string output_file){ //  std::unordered_map<char,int> freq){
+
+	std::string txt = read_file(input_file);
+	std::unordered_map<char, int> freq;
+	for(int i=0;i<txt.length();i++){
+		freq[txt[i]]++;
+	}
 	std::unordered_map<char,std::string> hashmap;
 	code coding;
 	Node *root = this->getHuffmanTree(txt,freq);
@@ -68,37 +74,38 @@ std::pair<std::string,code> Huffman::compress(std::string txt, std::unordered_ma
 		compressed_string+=hashmap[c];
 	}
 	printf("Score is %f \n",this->score);
-	return make_pair(compressed_string,coding);
+	write_file(output_file,compressed_string);
+	//write to temp.txt
 }
-std::string Huffman::uncompress(std::string txt, code coding){
-	// we need a hashmap from string to char	
-	std::unordered_map<std::string,char> uncompress_code;
-	std::string uncompressed_string;
-	int cur_size = coding[0].second;
-	std::string el_code = std::string(cur_size, '0');
-	for(auto i: coding){
-	
-		if(i.second>cur_size){
-			for(int j=0;j<i.second-cur_size;j++)
-				el_code = el_code+ "0";
-			cur_size=i.second;
-		}else if(i.second<cur_size){
-			for(int j=0;j< cur_size-i.second;j++)
-				el_code.pop_back();
-			cur_size=i.second;
-		}
-		uncompress_code[el_code] = i.first;
-
-		el_code = add_binary(el_code, "1");	
-	}
-	el_code = "";
-	for(char c: txt){
-		el_code+=c;
-		if(uncompress_code.count(el_code)){
-			uncompressed_string+=uncompress_code[el_code];	
-			el_code="";
-		}
-	}
-	return uncompressed_string;
+void Huffman::uncompress(std::string input_file, std::string output_file){
+//	// we need a hashmap from string to char	
+//	std::unordered_map<std::string,char> uncompress_code;
+//	std::string uncompressed_string;
+//	int cur_size = coding[0].second;
+//	std::string el_code = std::string(cur_size, '0');
+//	for(auto i: coding){
+//	
+//		if(i.second>cur_size){
+//			for(int j=0;j<i.second-cur_size;j++)
+//				el_code = el_code+ "0";
+//			cur_size=i.second;
+//		}else if(i.second<cur_size){
+//			for(int j=0;j< cur_size-i.second;j++)
+//				el_code.pop_back();
+//			cur_size=i.second;
+//		}
+//		uncompress_code[el_code] = i.first;
+//
+//		el_code = add_binary(el_code, "1");	
+//	}
+//	el_code = "";
+//	for(char c: txt){
+//		el_code+=c;
+//		if(uncompress_code.count(el_code)){
+//			uncompressed_string+=uncompress_code[el_code];	
+//			el_code="";
+//		}
+//	}
+//	return uncompressed_string;
 }
 

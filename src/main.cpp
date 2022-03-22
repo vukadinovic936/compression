@@ -5,9 +5,11 @@
 #include "Arithmetic.h"
 #include "Huffman.h"
 #include "BigFloat.h"
-
+#include "Arithmetic.h"
+#include <fstream>
 using namespace std;
 using namespace Helpers;
+
 int main(int argc, char** argv){
 	try{
 		std::string commandName = argv[1];
