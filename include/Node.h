@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <bitset>
+#include <stack>
 
 class Node
 {
@@ -15,6 +17,8 @@ class Node
 		int height();
 		void printTree();
 		void inOrder();
+		void export_tree(std::string &s);
+		void import_tree(std::string s, int &cutoff);
 		Node* getLeft();
 		Node* getRight();
 

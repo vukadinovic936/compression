@@ -11,7 +11,7 @@ Compress::~Compress(){
 }
 int Compress::run(){
 	//input params
-	std::string filepath = "test/test.txt";
+	std::string filepath = "test/test3.txt";
 	std::string output_file = "temp.zen";	
 
 	std::string txt = read_file(filepath);

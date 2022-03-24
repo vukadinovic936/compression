@@ -5,7 +5,6 @@
 #include <unordered_map>
 #include <vector>
 #include <stack>
-
 #include "Algos.h"
 #include "Node.h"
 #include "Coding.h"
@@ -23,6 +22,7 @@ class Huffman: public Coding
 		void compress(std::string input_path, std::string outout_path);
 		void uncompress(std::string input_path, std::string output_path);
 		virtual ~Huffman();
+		
 
 	private:
 		std::string name;
@@ -30,6 +30,7 @@ class Huffman: public Coding
 		double score;
 		Node* getHuffmanTree(std::string txt, std::unordered_map<char,int> freq);
 		void getHuffmanCoding(Node* root, std::unordered_map<char,std::string> &hashmap, code &coding);
+		void recoverHuffmanCoding(Node *root, std::unordered_map<std::string, char> &hashmap, code &coding);
 };
 
 #endif

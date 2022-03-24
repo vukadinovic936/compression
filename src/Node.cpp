@@ -41,6 +41,57 @@ void Node::inOrder(){
 		this->right->inOrder();
 	}
 }
+
+void Node::export_tree(std::string &s){
+	if(this->left){
+		this->left->export_tree(s);
+	}
+	if(this->right){
+		this->right->export_tree(s);
+	}
+	if(this->ch == '\0'){
+		s+='0';
+	}else{
+		s+='1';
+		s+=std::bitset<8>(this->ch).to_string();
+	}
+}
+
+void Node::import_tree(std::string s, int &cutoff){
+	std::stack<Node*> st;	
+	for(int i=0;i<s.length();i++){
+
+		if(s[i]=='1'){
+			std::string temp="";
+			for(int j=1;j<=8;j++){
+				temp+=s[i+j];
+			}
+			st.push( new Node(static_cast<char>(std::bitset<8>(temp).to_ulong()), 0 )); 
+			i+=8;
+		}else if(s[i]=='0'){
+			if(st.size()==1){
+				this->ch=st.top()->ch;
+				this->freq=st.top()->freq;
+				this->left=st.top()->left;
+				this->right=st.top()->right;
+				cutoff=i;
+				break;
+			}else{
+				Node* a = st.top();
+				st.pop();
+				Node* b = st.top();
+				st.pop();
+				st.push(new Node('\0',0,b,a));
+			}
+		}
+
+	}
+	this->ch=st.top()->ch;
+	this->freq=st.top()->freq;
+	this->left=st.top()->left;
+	this->right=st.top()->right;
+}
+
 void Node::printTreeUtil(int space){
 		if (this == NULL)
 			return;

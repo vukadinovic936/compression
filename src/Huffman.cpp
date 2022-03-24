@@ -32,7 +32,33 @@ void Huffman::getHuffmanCoding(Node* root, std::unordered_map<char,std::string> 
 				q.push(make_pair(u.first->getLeft(), u.second+"0"));
 		}
 		this->score = score/hashmap.size();
-	}
+}
+void Huffman::recoverHuffmanCoding(Node *root, std::unordered_map<std::string, char> &hashmap, code &coding){
+
+		std::stack<std::pair<Node*,std::string>> q;
+	    q.push(std::make_pair(root, ""));
+		//bfs
+		while(!q.empty()) {
+
+			std::pair<Node*,std::string> u = q.top();
+
+			q.pop();
+
+			if(u.first->getRight())
+				q.push(make_pair(u.first->getRight(), u.second+"1"));
+
+
+			if(u.first->ch != '\0'){
+				hashmap[u.second] = u.first->ch;
+				this->score += u.second.length();
+				coding.push_back(std::make_pair(u.first->ch, u.second.length()));
+			}
+
+			if(u.first->getLeft())
+				q.push(make_pair(u.first->getLeft(), u.second+"0"));
+		}
+		this->score = score/hashmap.size();
+}
 Node* Huffman::getHuffmanTree(std::string text,std::unordered_map<char,int> freq){
 	struct myComp {
 		constexpr bool operator()(
@@ -69,43 +95,44 @@ void Huffman::compress(std::string input_file, std::string output_file){ //  std
 	Node *root = this->getHuffmanTree(txt,freq);
 	root->printTree();
 	this->getHuffmanCoding(root,hashmap, coding);
+	for(auto c:hashmap){
+		std::cout << c.first << " " << c.second << std::endl;
+	}
 	std::string compressed_string = "";
 	for(char c : txt){
 		compressed_string+=hashmap[c];
 	}
-	printf("Score is %f \n",this->score);
-	write_file(output_file,compressed_string);
-	//write to temp.txt
+	printf("Score is %f \n",this->score);	
+	std::string exported_tree="";
+	root->export_tree(exported_tree);
+	exported_tree = exported_tree+"0"+compressed_string;
+	write_file(output_file,exported_tree);
 }
 void Huffman::uncompress(std::string input_file, std::string output_file){
-//	// we need a hashmap from string to char	
-//	std::unordered_map<std::string,char> uncompress_code;
-//	std::string uncompressed_string;
-//	int cur_size = coding[0].second;
-//	std::string el_code = std::string(cur_size, '0');
-//	for(auto i: coding){
-//	
-//		if(i.second>cur_size){
-//			for(int j=0;j<i.second-cur_size;j++)
-//				el_code = el_code+ "0";
-//			cur_size=i.second;
-//		}else if(i.second<cur_size){
-//			for(int j=0;j< cur_size-i.second;j++)
-//				el_code.pop_back();
-//			cur_size=i.second;
-//		}
-//		uncompress_code[el_code] = i.first;
-//
-//		el_code = add_binary(el_code, "1");	
-//	}
-//	el_code = "";
-//	for(char c: txt){
-//		el_code+=c;
-//		if(uncompress_code.count(el_code)){
-//			uncompressed_string+=uncompress_code[el_code];	
-//			el_code="";
-//		}
-//	}
-//	return uncompressed_string;
+
+	std::string encoded_txt = read_file(input_file);	
+	Node *new_root = new Node('\0',0);
+	int cutoff=0;
+	new_root->import_tree(encoded_txt, cutoff);
+	encoded_txt = encoded_txt.substr(cutoff+1, encoded_txt.length()-cutoff);
+	new_root->printTree();
+
+	std::unordered_map<std::string, char> hashmap2;
+	code coding2;
+	this->recoverHuffmanCoding(new_root,hashmap2, coding2);
+	for(auto c:hashmap2){
+		std::cout << c.first << " " << c.second << std::endl;
+	}
+	std::string el_code = "";
+	std::string uncompressed_string = "";
+	for(char c: encoded_txt){
+		el_code+=c;
+		if(hashmap2.count(el_code)){
+			uncompressed_string+=hashmap2[el_code];	
+			el_code="";
+		}
+	}
+	std::cout << uncompressed_string << std::endl;
+	write_file(output_file,uncompressed_string);
 }
 
