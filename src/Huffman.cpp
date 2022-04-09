@@ -86,6 +86,7 @@ Node* Huffman::getHuffmanTree(std::string text,std::unordered_map<char,int> freq
 void Huffman::compress(std::string input_file, std::string output_file){ //  std::unordered_map<char,int> freq){
 
 	std::string txt = read_file(input_file);
+	std::cout << txt << std::endl;
 	std::unordered_map<char, int> freq;
 	for(int i=0;i<txt.length();i++){
 		freq[txt[i]]++;
@@ -106,10 +107,15 @@ void Huffman::compress(std::string input_file, std::string output_file){ //  std
 	std::string exported_tree="";
 	root->export_tree(exported_tree);
 	exported_tree = exported_tree+"0"+compressed_string;
+	// add write to a binary file
 	write_file(output_file,exported_tree);
+	//take output file in txt and dump it to a binary zen
+	exec( ("python lib/string_to_binary.py "+output_file).c_str());
 }
 void Huffman::uncompress(std::string input_file, std::string output_file){
-
+	//take output file in .zen and dump it to .txt
+	// add read from a binary file
+	exec( ("python lib/binary_to_string.py "+input_file).c_str());
 	std::string encoded_txt = read_file(input_file);	
 	Node *new_root = new Node('\0',0);
 	int cutoff=0;

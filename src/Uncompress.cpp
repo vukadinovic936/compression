@@ -8,11 +8,9 @@ Uncompress::Uncompress(std::string name, std::string description) : Command(name
 Uncompress::~Uncompress(){
 
 }
-int Uncompress::run(){
+int Uncompress::run(std::string file_name){
 	std::cout <<"Uncompressing" << std::endl;
-	//input params
-	std::string filepath = "temp.zen";
-	std::string output_path = "decoded.txt";
+	std::string output_file = split(file_name, '.')[0]+"_decoded.txt";
 
 //	std::string txt = read_file(filepath);
 //	if(txt[txt.length()-1]=='0'){
@@ -23,6 +21,6 @@ int Uncompress::run(){
 //	txt=txt.substr(0,txt.length()-1);
 //	write_file(filepath, txt);	
 	CodingFactory fac;
-	fac.getCoding()->uncompress(filepath, output_path);
+	fac.getCoding()->uncompress(file_name, output_file);
 	return 0;
 }

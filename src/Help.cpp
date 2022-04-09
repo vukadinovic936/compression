@@ -8,7 +8,7 @@ Help::Help(std::string name, std::string description) : Command(name, descriptio
 Help::~Help(){
 
 }
-int Help::run(){
+int Help::run(std::string file_name){
 	std::cout << STRINGS_HELP_CONTENT << std::endl;
 	return 0;
 }

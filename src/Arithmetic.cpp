@@ -17,9 +17,13 @@ void Arithmetic::compress(std::string input_path, std::string output_path){
 		perror("Error renaming file");
 	else
 		cout << "File renamed successfully";	
+	
+	exec( ("python lib/string_to_binary.py "+output_path).c_str());
 }
 
 void Arithmetic::uncompress(std::string input_path, std::string output_path){
+
+	exec( ("python lib/binary_to_string.py "+input_path).c_str());
 
 	clear_file(STRINGS_DECODED_TXT);
 	system(("echo \"$(cat "+ input_path+ ")\" | ./lib/ArithCodeTut/src/arith_simple -D").c_str());

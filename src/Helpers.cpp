@@ -14,22 +14,16 @@ void Helpers::append_to_file(std::string file_path, std::string content){
 	myfile << content;
 	myfile.close();
 }
-std::string Helpers::read_file(std::string file_path){
-	std::string txt = "";
-	std::string line;
-	std::ifstream myfile(file_path);
-	if (myfile.is_open())
-	{
-		while ( getline (myfile,line) )
-		{
-			txt+=line;
-		}
-		myfile.close();
-	}else{
-		std::cout << "Unable to open file" << std::endl;
-	} 
-	return txt;
-
+std::string Helpers::read_file(std::string path) {
+    auto ss = ostringstream{};
+    std::ifstream input_file(path);
+    if (!input_file.is_open()) {
+        std::cerr << "Could not open the file - '"
+             << path << "'" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    ss << input_file.rdbuf();
+    return ss.str();
 }
 std::string Helpers::move_by(std::string a, int by){
 	for(int i=0;i<by;i++){
@@ -97,4 +91,40 @@ void Helpers::clear_file(std::string file_path){
 	std::ofstream ofs;
 	ofs.open(file_path, std::ofstream::out | std::ofstream::trunc);
 	ofs.close();
+}
+bool Helpers::test_algo(std::string algo_name){
+	
+	printf("Testing %s\n",algo_name.c_str());
+	system("./zeno algos");
+	//system("1");
+	// get number of files in test/ directory
+	//int n = 3;
+	//for(int i=0;i<n;i++){
+	//	printf("Running test %d",i+1);
+	//	system( ("./zeno compress test/test" + std::to_string(i+1) + ".txt").c_str() );
+	//	system( ("./zeno uncompress test/test" + std::to_string(i+1) + ".zen").c_str() );
+	//}
+
+	return true;
+}
+std::vector<std::string> Helpers::split(std::string str, char delimiter){
+	std::vector<std::string> result;
+	std::stringstream ss(str);
+	std::string token;
+	while(std::getline(ss, token, delimiter)){
+		result.push_back(token);
+	}
+	return result;
+}
+std::string Helpers::exec(const char* cmd){
+	std::array<char, 128> buffer;
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+        result += buffer.data();
+    }
+    return result;
 }

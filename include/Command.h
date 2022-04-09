@@ -8,7 +8,7 @@ class Command
 		Command();
 		Command(std::string name, std::string description);
 		virtual ~Command();
-		virtual int run() = 0;
+		virtual int run(std:: string file_name) = 0;
 		std::string getName();
 		std::string getDescription();
 

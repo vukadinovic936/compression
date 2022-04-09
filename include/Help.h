@@ -11,7 +11,7 @@ class Help:public Command
 		Help();
 		Help(std::string name, std::string description);
 		virtual ~Help();
-		int run();
+		int run(std::string file_name="");
 
 	private:
 		std::string name;

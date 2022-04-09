@@ -17,7 +17,7 @@ class Compress : public Command
 		Compress();
 		Compress(std::string name, std::string description);
 		virtual ~Compress();
-		int run();
+		int run(std::string file_name);
 
 	private:
 		std::string name;

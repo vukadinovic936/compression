@@ -12,7 +12,7 @@ class Uncompress: public Command
 		Uncompress();
 		Uncompress(std::string name, std::string description);
 		virtual ~Uncompress();
-		int run();
+		int run(std::string file_name);
 
 	private:
 		std::string name;

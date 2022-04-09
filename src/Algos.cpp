@@ -7,13 +7,20 @@ Algos::Algos(std::string name, std::string description):Command(name, descriptio
 
 }
 
-int Algos::run(){
-	printf("SELECT THE CODE YOU WANT TO USE\n");
-	printf("1: HUFFMAN\n");
-	printf("2: ARITHMETIC\n");
+int Algos::run(std::string file_name){
 	int user_input;
-	scanf("%d",&user_input);
-
+	if(!file_name.empty()){
+		if(file_name=="HUFFMAN"){
+			user_input=1;
+		}else if (file_name=="ARITHMETIC"){
+			user_input=2;
+		}
+	}else{
+		printf("SELECT THE CODE YOU WANT TO USE\n");
+		printf("1: HUFFMAN\n");
+		printf("2: ARITHMETIC\n");
+		scanf("%d",&user_input);
+	}
 	std::ofstream coding_file;
 	coding_file.open("coding.txt");
 	if(user_input==1){

@@ -9,14 +9,11 @@ Compress::Compress(std::string name, std::string description): Command(name,desc
 Compress::~Compress(){
 
 }
-int Compress::run(){
+int Compress::run(std::string file_name){
 	//input params
-	std::string filepath = "test/test3.txt";
-	std::string output_file = "temp.zen";	
-
-	std::string txt = read_file(filepath);
+	std::string output_file = split(file_name, '.')[0]+".zen";
 	CodingFactory fac;
-	fac.getCoding()->compress(filepath, output_file);
+	fac.getCoding()->compress(file_name, output_file);
 
 //	if(read_file(STRINGS_CODING_FILE)==STRINGS_HUFFMAN_CODING){
 //		append_to_file(output_file, "0");	

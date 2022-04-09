@@ -12,7 +12,7 @@ class Algos: public Command
 		Algos();
 		Algos(std::string name, std::string description);
 		virtual ~Algos();
-		int run();
+		int run(std::string file_name="");
 
 	private:
 		std::string name;
