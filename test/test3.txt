@@ -34,5 +34,4 @@ melody is stored and recalled.
 
 It is interesting that, in pulling a melody out of memory, most people do not 
 discriminate as to key, so that they are as likely to sing "Happy Birthday" in the key of F- 
-sharp as in the key of C. This indicates that tone relationships, rather than absolute tones, 
-are stored. But there is no reason 
+sharp as in the key of C. This indicates that tone relationships, rather than absolute tones
