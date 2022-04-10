@@ -19,7 +19,7 @@ $(ODIR)/%.o: $(SRC)/%.cpp $(DEPS)
 zeno: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 	$(MAKE) -C lib/ArithCodeTut/src/
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 	./helpers/addString.rc WORKING_DIR $(shell pwd)
 #   add alias
 
