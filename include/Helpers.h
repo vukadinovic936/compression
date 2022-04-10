@@ -12,6 +12,8 @@
 #include <stdexcept>
 #include <array>
 #include <sys/stat.h>
+#include <filesystem>
+#include <unistd.h>
 
 using std::ifstream; using std::ostringstream;
 #pragma once
@@ -29,4 +31,6 @@ namespace Helpers{
 	std::string exec(const char* cmd);
 	long get_file_size(std::string filename);
 	double compression_rate(std::string compressed_file_path, std::string original_file_path);
+	std::string cur_dir();
+	std::string join_paths(std::string path1, std::string path2);
 }

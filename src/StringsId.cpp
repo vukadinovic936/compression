@@ -1,4 +1,3 @@
-#include "StringsId.h"
 const char* STRINGS_COMPRESS_COMMAND="compress";
 const char* STRINGS_UNCOMPRESS_COMMAND="uncompress";
 const char* STRINGS_HELP_COMMAND="help";
@@ -9,3 +8,4 @@ const char* STRINGS_CODING_FILE = "coding.txt";
 const char* STRINGS_ARITHMETIC = "ARITHMETIC";
 const char* STRINGS_TEMP_ZEN = "temp.zen";
 const char* STRINGS_DECODED_TXT = "decoded.txt";
+const char* STRINGS_WORKING_DIR = "/home/milos/zeno";

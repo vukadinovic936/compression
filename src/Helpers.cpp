@@ -2,6 +2,11 @@
 
 using namespace Helpers;
 
+std::string Helpers::cur_dir() {
+    char tmp[256];
+    getcwd(tmp, 256);
+	return tmp;
+}
 void Helpers::write_file(std::string file_path, std::string content){
 
 	clear_file(file_path);
@@ -137,4 +142,7 @@ long Helpers::get_file_size(std::string filename)
 
 double Helpers::compression_rate(std::string compressed_file_path, std::string original_file_path){
 	return ((double) get_file_size(compressed_file_path) / get_file_size(original_file_path)) * 100 ;
+}
+std::string Helpers::join_paths(std::string path1, std::string path2){
+	return (path1+"/"+path2);
 }

@@ -20,6 +20,8 @@ zeno: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 	$(MAKE) -C lib/ArithCodeTut/src/
 	pip install -r requirements.txt
+	./helpers/addString.rc WORKING_DIR $(shell pwd)
+#   add alias
 
 .PHONY: clean
 

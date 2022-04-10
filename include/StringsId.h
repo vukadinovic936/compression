@@ -8,3 +8,4 @@ extern const char* STRINGS_CODING_FILE;
 extern const char* STRINGS_ARITHMETIC;
 extern const char* STRINGS_TEMP_ZEN;
 extern const char* STRINGS_DECODED_TXT;
+extern const char* STRINGS_WORKING_DIR;
