@@ -86,6 +86,8 @@ Node* Huffman::getHuffmanTree(std::string text,std::unordered_map<char,int> freq
 void Huffman::compress(std::string input_file, std::string output_file){ //  std::unordered_map<char,int> freq){
 
 	std::string txt = read_file(input_file);
+	// add eof character
+	txt += '\a';
 	std::cout << txt << std::endl;
 	std::unordered_map<char, int> freq;
 	for(int i=0;i<txt.length();i++){
@@ -134,6 +136,9 @@ void Huffman::uncompress(std::string input_file, std::string output_file){
 	for(char c: encoded_txt){
 		el_code+=c;
 		if(hashmap2.count(el_code)){
+			if(hashmap2[el_code] == '\a'){
+				break;
+			}
 			uncompressed_string+=hashmap2[el_code];	
 			el_code="";
 		}
