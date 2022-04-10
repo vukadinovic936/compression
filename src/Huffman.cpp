@@ -88,7 +88,6 @@ void Huffman::compress(std::string input_file, std::string output_file){ //  std
 	std::string txt = read_file(input_file);
 	// add eof character
 	txt += '\a';
-	std::cout << txt << std::endl;
 	std::unordered_map<char, int> freq;
 	for(int i=0;i<txt.length();i++){
 		freq[txt[i]]++;
@@ -96,22 +95,18 @@ void Huffman::compress(std::string input_file, std::string output_file){ //  std
 	std::unordered_map<char,std::string> hashmap;
 	code coding;
 	Node *root = this->getHuffmanTree(txt,freq);
-	root->printTree();
 	this->getHuffmanCoding(root,hashmap, coding);
-	for(auto c:hashmap){
-		std::cout << c.first << " " << c.second << std::endl;
-	}
 	std::string compressed_string = "";
 	for(char c : txt){
 		compressed_string+=hashmap[c];
 	}
-	printf("Score is %f \n",this->score);	
 	std::string exported_tree="";
 	root->export_tree(exported_tree);
 	exported_tree = exported_tree+"0"+compressed_string;
 	// add write to a binary file
 	write_file(output_file,exported_tree);
 	//take output file in txt and dump it to a binary zen
+	printf("\ninput symbols %lu, output bits %lu,\n ratio %f bits per symbol\n", freq.size(), compressed_string.length(), this->score);
 	exec( ("python lib/string_to_binary.py "+output_file).c_str());
 }
 void Huffman::uncompress(std::string input_file, std::string output_file){
@@ -123,14 +118,9 @@ void Huffman::uncompress(std::string input_file, std::string output_file){
 	int cutoff=0;
 	new_root->import_tree(encoded_txt, cutoff);
 	encoded_txt = encoded_txt.substr(cutoff+1, encoded_txt.length()-cutoff);
-	new_root->printTree();
-
 	std::unordered_map<std::string, char> hashmap2;
 	code coding2;
 	this->recoverHuffmanCoding(new_root,hashmap2, coding2);
-	for(auto c:hashmap2){
-		std::cout << c.first << " " << c.second << std::endl;
-	}
 	std::string el_code = "";
 	std::string uncompressed_string = "";
 	for(char c: encoded_txt){
@@ -143,7 +133,6 @@ void Huffman::uncompress(std::string input_file, std::string output_file){
 			el_code="";
 		}
 	}
-	std::cout << uncompressed_string << std::endl;
 	write_file(output_file,uncompressed_string);
 }
 

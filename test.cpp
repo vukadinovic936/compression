@@ -42,6 +42,7 @@ bool test_algo(std::string algo_name){
 }
 int main(){
 	test_algo("ARITHMETIC");
+	printf("\n");
 	test_algo("HUFFMAN");
 	return 0;
 }

@@ -128,3 +128,13 @@ std::string Helpers::exec(const char* cmd){
     }
     return result;
 }
+long Helpers::get_file_size(std::string filename)
+{
+    struct stat stat_buf;
+    int rc = stat(filename.c_str(), &stat_buf);
+    return rc == 0 ? stat_buf.st_size : -1;
+}
+
+double Helpers::compression_rate(std::string compressed_file_path, std::string original_file_path){
+	return ((double) get_file_size(compressed_file_path) / get_file_size(original_file_path)) * 100 ;
+}

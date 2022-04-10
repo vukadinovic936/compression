@@ -15,8 +15,6 @@ void Arithmetic::compress(std::string input_path, std::string output_path){
 
 	if (rename(STRINGS_TEMP_ZEN, output_path.c_str()) != 0)
 		perror("Error renaming file");
-	else
-		cout << "File renamed successfully";	
 	
 	exec( ("python lib/string_to_binary.py "+output_path).c_str());
 }
@@ -30,6 +28,4 @@ void Arithmetic::uncompress(std::string input_path, std::string output_path){
 
 	if (rename(STRINGS_DECODED_TXT, output_path.c_str()) != 0)
 		perror("Error renaming file");
-	else
-		cout << "File renamed successfully";
 }

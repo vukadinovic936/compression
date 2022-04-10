@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <fstream>
 #include <stdio.h>
 #include <unordered_map>
 #include <sstream>
@@ -12,6 +11,7 @@
 #include <memory>
 #include <stdexcept>
 #include <array>
+#include <sys/stat.h>
 
 using std::ifstream; using std::ostringstream;
 #pragma once
@@ -27,4 +27,6 @@ namespace Helpers{
 	bool test_algo(std::string algo_name);
 	std::vector<std::string> split(std::string str, char delimiter);	
 	std::string exec(const char* cmd);
+	long get_file_size(std::string filename);
+	double compression_rate(std::string compressed_file_path, std::string original_file_path);
 }
