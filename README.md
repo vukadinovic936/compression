@@ -2,6 +2,11 @@
 Zeno is a Command Line Tool that losslessly compresses text files.
 ## Installation
 ## Test
+Check that your installation was successful by navigating to zeno and running
+```
+g++ test.cpp -o test.out && ./test.out
+```
+If all tests passed, you can starting using zeno!
 ## Usage
 Type ```zeno help``` and you will see a list of all commands.
 
