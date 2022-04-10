@@ -20,8 +20,7 @@ zeno: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 	$(MAKE) -C lib/ArithCodeTut/src/
 	pip3 install -r requirements.txt
-	./helpers/addString.rc WORKING_DIR $(shell pwd)
-#   add alias
+	sed -i "s|random_path|$(shell pwd)|" src/StringsId.cpp
 
 .PHONY: clean
 
