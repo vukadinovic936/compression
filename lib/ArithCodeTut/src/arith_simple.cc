@@ -33,7 +33,7 @@
 
 // initialize the frequency tables supposing that the input is text
 #define  TEXTLIKE_PROBABILITIES
-
+std::ofstream myfile;
 // print table of frequencies
 // #define PRINT_TABLE
 
@@ -51,10 +51,8 @@ void decoder_callback(int s, void *p)
     ; // may receive a FLUSH_SYMBOL here
   } else if( s != my_eof ) {
     // good symbol
-  std::ofstream myfile;
-  myfile.open ("decoded.txt", std::ios_base::app);
   myfile << (char) s;
-  myfile.close();
+
   //fputc(s, stdout);
 
     // update the frequency table for next upcoming symbol
@@ -74,10 +72,7 @@ void decoder_callback(int s, void *p)
 
 void encoder_callback(	int b, void *p)
 {
-  std::ofstream myfile;
-  myfile.open ("temp.zen", std::ios_base::app);
   myfile << b;
-  myfile.close();
   //fputc(b+'0',stdout);
 }
 
@@ -110,8 +105,8 @@ Flags:\n\
 int
 main(int argc, char * argv[])
 {
+  
   char *cmdname = argv[0];
-
   int check_n_arguments =  argc == 2  ;
 
   if ( ! check_n_arguments ) {
@@ -132,6 +127,7 @@ main(int argc, char * argv[])
 
 
   if ( 0==strcmp(argv[1] , "-C") ) {
+    myfile.open ("temp.zen", std::ios_base::app);
     //////////////// ENCODER
     AC::Encoder *E = new AC::Encoder(encoder_callback) ;
     E -> verbose_stream = stderr;
@@ -160,8 +156,11 @@ main(int argc, char * argv[])
       fprintf(stderr," input symbols %" PRIu64  " output bits %" PRIu64  ",\n ratio %f bits per symbol\n",
 	      ns,nb,(double)nb/(double)ns);
     }
+    myfile.close();
     /////////////////// end of encoder code
   } else   if ( 0==strcmp(argv[1] , "-D") ) {
+
+    myfile.open ("decoded.txt", std::ios_base::app);
     //////////////////// DECODER
     AC::Decoder * D= new AC::Decoder(decoder_callback);
     D -> verbose_stream = stderr;
@@ -179,6 +178,7 @@ main(int argc, char * argv[])
     }
     if(!flag_eof)
       fprintf(stderr,"\n*** internal error, did not receive EOF, \n");
+    myfile.close();
     ////////////////
   } else {
     fprintf(stderr,"Unrecognized option: %s\n\n",argv[1]);

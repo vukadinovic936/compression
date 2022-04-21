@@ -6,6 +6,7 @@
 #include <string>
 #include <array>
 using namespace std;
+
 std::string exec(const char* cmd) {
     std::array<char, 128> buffer;
     std::string result;
@@ -45,4 +46,8 @@ int main(){
 	printf("\n");
 	test_algo("HUFFMAN");
 	return 0;
+	// to compare files from terminal
+	/* 
+		cmp --silent ORIGINAL DECODED || echo \"files are different\"
+	*/
 }
