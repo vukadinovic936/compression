@@ -1,6 +1,12 @@
 # Lossless Compressor Zeno
 Zeno is a Command Line Tool that losslessly compresses text files.
+## Requirements
+To install Zeno, you need to have Unix based shell, C, C++, Python and Make
 ## Installation
+Installation is done in two steps. First clone the repository
+```git clone https://github.com/vukadinovic936/zeno```
+then navigate to zeno and run the file install.sh
+``` cd zeno && ./install.sh ```
 ## Test
 Check that your installation was successful by navigating to zeno and running
 ```
