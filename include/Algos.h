@@ -5,7 +5,10 @@
 #include "Command.h"
 #include <iostream>
 #include <fstream>
+#include "StringsId.h"
+#include "Helpers.h"
 
+using namespace Helpers;
 class Algos: public Command
 {
 	public:

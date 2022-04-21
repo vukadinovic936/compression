@@ -22,7 +22,7 @@ int Algos::run(std::string file_name){
 		scanf("%d",&user_input);
 	}
 	std::ofstream coding_file;
-	coding_file.open("coding.txt");
+	coding_file.open(std::string(STRINGS_WORKING_DIR) + "/coding.txt" );
 	if(user_input==1){
 		coding_file << "HUFFMAN";
 	}else if(user_input==2){
